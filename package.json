@@ -1,0 +1,53 @@
+{
+  "name": "vue-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./client/main.js",
+  "scripts": {
+    "postinstall": "node patch.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-prod": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "serve": "webpack serve --mode development",
+    "devserve": "webpack --mode development && webpack serve --mode development",
+    "h": "webpack -h",
+    "api-server": "nodemon /server/public/api/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "axios": "^0.25.0",
+    "cors": "^2.8.5",
+    "crypto-browserify": "^3.12.0",
+    "css-loader": "^6.5.1",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "html-webpack-plugin": "^5.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mini-css-extract-plugin": "^2.5.2",
+    "nodemon": "^2.0.15",
+    "postcss": "^8.4.5",
+    "postcss-loader": "^6.2.1",
+    "process": "^0.11.10",
+    "sass": "^1.49.0",
+    "sass-loader": "^12.4.0",
+    "stream-browserify": "^3.0.0",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.0.15",
+    "vue": "^2.6.14",
+    "vue-loader": "^15.9.8",
+    "vue-router": "^3.5.3",
+    "vue-template-compiler": "^2.6.14",
+    "vuex": "^3.6.2",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "crypto-js": "^3.1.9-1",
+    "stream": "0.0.2",
+    "util": "^0.12.4"
+  }
+}
