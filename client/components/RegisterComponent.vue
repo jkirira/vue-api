@@ -2,17 +2,20 @@
   <div class="form-wrapper">
     <div>
 
-      <div v-if="error_message" class="form-entry">{{ error_message }}</div>
+      <h2>Register</h2>
+
+      <div v-if="error_message" id="messageDiv" class="form-entry error">{{ error_message }}</div>
+
     </div>
 
       <form>
-        <h2>Register</h2>
+
       <div class="form-entry">
         <div class="label-div">
           <label for="username">UserName</label>
         </div>
         <div class="label-div">
-          <input type="text" id="username" v-model="local_username" class="border-gray-500" >
+          <input type="text" id="username" v-model="form.username" class="border-gray-500" >
         </div>
       </div>
 
@@ -21,7 +24,7 @@
           <label for="password">Password</label>
         </div>
         <div class="label-div">
-          <input type="password" id="password" v-model="local_password" >
+          <input type="password" id="password" v-model="form.password" >
         </div>
       </div>
 
@@ -45,14 +48,13 @@ export default {
   },
   data(){
     return {
-      local_username: '',
-      local_password: '',
+      form: {},
       error_message: null
     }
   },
   methods: {
     validate(){
-      if(this.local_username.length == '' || this.local_password == '' ) {
+      if( !this.form.username || !this.form.password ) {
         this.error_message = 'Please fill all values'
         return false
       }
@@ -65,15 +67,15 @@ export default {
         return;
       }
 
-      axios.post('http://localhost:4000/signup',{username: this.local_username, password: this.local_password})
+      axios.post('http://localhost:4000/signup',{username: this.form.username, password: this.form.password})
           .then((response) => {
             console.log(response.data)
-            this.error_message(response.data.success)
+            this.error_message = response.data.success
             this.$router.push('/login')
           })
           .catch((err) => {
             console.log('signup error', err)
-            this.error_message(err)
+            this.error_message = err
           })
     }
   }
@@ -85,15 +87,16 @@ form{
   padding: 10px 0px;
   box-sizing: border-box;
 }
-.form-wrapper{
-  border: 2px solid grey;
-  box-sizing: border-box;
-  margin-top: 20px;
-}
 .form-entry{
   text-align: left;
   box-sizing: border-box;
   padding: 10px 15% 10px;
+}
+.error{
+  border: 2px solid red;
+  border-radius: 5px;
+  color: red;
+  margin: 0 15%;
 }
 input, textarea{
   font-size: 1.3rem;

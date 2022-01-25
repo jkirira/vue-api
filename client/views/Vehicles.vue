@@ -57,5 +57,6 @@ export default {
   flex-shrink: initial;
   text-align: left;
   margin-top: 10px;
+  text-decoration: none;
 }
 </style>

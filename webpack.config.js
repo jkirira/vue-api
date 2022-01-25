@@ -2,10 +2,12 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
+const nodeExternals = require('webpack-node-externals')
+
 const path = require('path')
 
 module.exports = {
-
+    externals: [nodeExternals()],
     entry: path.join(__dirname, 'client/main.js'),
 
     module: {
@@ -19,12 +21,16 @@ module.exports = {
                 use: [
                         'style-loader',
                         'css-loader',
-                        'postcss-loader',
                         'sass-loader',
+                        'postcss-loader',
                 ]
             },
             //other rules
         ]
+    },
+
+    devServer: {
+        historyApiFallback: true,
     },
 
     plugins: [

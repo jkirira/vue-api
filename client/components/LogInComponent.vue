@@ -1,9 +1,11 @@
+<script src="../../server/public/controllers/vehicle_controller.js"></script>
 <template>
   <div class="form-wrapper">
+    <h2>Login</h2>
+
+    <div v-if="error_message" class="form-entry error">{{ error_message }}</div>
 
     <form v-if="!isLoggedIn">
-
-      <h2>Login</h2>
 
       <div class="form-entry">
         <div class="label-div">
@@ -26,7 +28,7 @@
     </form>
 
     <div v-if="!isLoggedIn" class="form-entry">
-      <custom-button info="Sign In" v-on:customClick="loginUser" ></custom-button>
+      <custom-button info="Sign In" @customClick="loginUser" ></custom-button>
     </div>
 
     <div v-if="isLoggedIn" class = "wrapper">
@@ -57,7 +59,7 @@ export default {
   methods: {
 
     validate(){
-      if(this.form.username.length == '' || this.form.password == '' ) {
+      if( !this.form.username || !this.form.password) {
         this.error_message = 'Please fill all values'
         return false;
       }
@@ -73,6 +75,7 @@ export default {
       axios.post('http://localhost:4000/login',{username: this.form.username, password: this.form.password})
         .then((response) => {
           this.$store.dispatch('set_token', response.data.token);
+          localStorage.setItem('login_details', JSON.stringify(response.data.token))
           console.log(response.data)
           this.$router.push('/vehicles')
         })
@@ -91,15 +94,23 @@ form{
   padding: 10px 0px;
   box-sizing: border-box;
 }
-.form-wrapper{
-  border: 2px solid grey;
-  box-sizing: border-box;
-  margin-top: 20px;
-}
+
 .form-entry{
   text-align: left;
   box-sizing: border-box;
   padding: 10px 15% 10px;
+}
+.wrapper{
+  box-sizing: border-box;
+  padding: 20px;
+  font-size: 1.5rem;
+  margin-top: 50px;
+}
+.error{
+  border: 2px solid red;
+  border-radius: 5px;
+  color: red;
+  margin: 0 15%;
 }
 input, textarea{
   font-size: 1.3rem;

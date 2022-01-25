@@ -32,13 +32,17 @@ const routes = [
             // { path: '/all', component: DisplayComponent, props: true}
         ]
     },
-
+    // {
+    //     path: '/:catchAll(.*)',
+    //     component: NotFoundComponent,
+    //     name: 'NotFound'
+    // }
 ]
 
 
 const router = new VueRouter({
     routes,
-    mode: 'history'
+    // mode: 'history',
 })
 
 

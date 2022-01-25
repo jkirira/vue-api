@@ -88,11 +88,9 @@ export default {
       query: ''
     }
   },
-
   computed:{
     ...mapGetters(['getVehicles'])
   },
-
   methods: {
 
     fetchVehicle() {
@@ -195,6 +193,7 @@ form{
 .form-wrapper, .output{
   border: 2px solid grey;
   box-sizing: border-box;
+
   margin-top: 20px;
   margin-left: 5px;
 }
@@ -214,7 +213,6 @@ form{
   box-sizing: border-box;
   font-size: 1.5rem;
   margin: 10px 0;
-  word-break: inherit;
 }
 input, textarea{
   font-size: 1.3rem;
@@ -235,9 +233,6 @@ input, textarea{
   display: grid;
   grid-template-columns: repeat(2, minmax(250px, 1fr));
   grid-gap: 10px;
-  box-sizing: border-box;
-  padding: 0 10px;
-  margin-top: 10px;
 }
 .output{
   border: 2px solid green;

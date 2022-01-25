@@ -3,8 +3,13 @@ const jwt = require('jsonwebtoken')
 
 var users = Array();
 
+cors_url = 'http://localhost:8084'
 
 function register(req, res){
+
+    res.set('Access-Control-Allow-Origin', cors_url)
+    res.set('Access-Control-Allow-Methods: POST');
+
     if( req.body.username == '' || req.body.password == '' ) {
         res.status(400).json({'error': "please fill all values"})
     }
@@ -24,6 +29,10 @@ function register(req, res){
 
 
 function login(req, res){
+
+    res.set('Access-Control-Allow-Origin', cors_url)
+    res.set('Access-Control-Allow-Methods: POST');
+
     if( req.body.username == '' || req.body.password == '' ) {
         res.status(400).json({'error': "please fill all values"})
     }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <div class="header">
+    <div class="bg-orange-500">
 
       <div class="top">
         <h1>Vue components</h1>
@@ -11,7 +11,8 @@
       <div class="top" id="nav">
         <router-link to="/">Home</router-link>
         <router-link v-if="!isLoggedIn" to="/register">Sign Up</router-link>
-        <router-link v-if="isLoggedIn" to="/vehicles">Vehicles</router-link>
+        <router-link v-if="isLoggedIn" :to="{name: 'vehicles'}">Vehicles</router-link>
+        <router-link v-if="isLoggedIn" :to="{name: 'logout'}">Logout</router-link>
 
       </div>
 
@@ -66,7 +67,7 @@ html, body{
   font-size: 16px;
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100vh;
   overflow-y: scroll;
 }
 #app {
@@ -92,17 +93,17 @@ html, body{
 }
 
 #nav >a {
-  color: white;
+  color: #41B883;
+  background: #ffffff;
   margin-left: 10px;
-  background: #41B883;
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
 }
 
 #nav > .router-link-exact-active{
-  color: #41B883;
-  background: #ffffff;
+  color: white;
+  background: #41B883;
 }
 
 .top{
@@ -112,6 +113,21 @@ html, body{
   justify-content: center;
   padding: 20px 0;
   font-size: 1.4rem;
+}
+.grid-wrapper{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  grid-gap: 10px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  margin-top: 10px;
+}
+.form-wrapper{
+  box-sizing: border-box;
+  margin: 20px 10px 10px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding-bottom: 20px;
 }
 
 @media screen and (min-width: 350px) {

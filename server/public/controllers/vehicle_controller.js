@@ -11,14 +11,19 @@ vehicle2 = new Vehicle("Mitsubishi", 4, "Yellow", 5)
 // vehicle2.id = 1
 vehicles.push(vehicle2);
 
-
+cors_url = 'http://localhost:8084'
 
 function getVehicles(req, res){
-    res.json(vehicles);
+
+    res.set('Access-Control-Allow-Origin', cors_url)
+    console.log(JSON.parse(JSON.stringify(vehicles)))
+    res.status(200).json( JSON.parse(JSON.stringify(vehicles)) );
 }
+
 
 function getVehicle(req, res){
 
+    res.set('Access-Control-Allow-Origin', cors_url)
     var findVehicle = vehicles.find( vehicle => vehicle.id == req.params.vehicleId )
     
     if ( findVehicle ){
@@ -30,7 +35,9 @@ function getVehicle(req, res){
 
 function addVehicle(req, res){
     // console.log( typeof(validateRequest(req.body)) )
-    
+
+    res.set('Access-Control-Allow-Origin', cors_url)
+    res.set('Access-Control-Allow-Methods: POST');
     if( validateRequest(req.body).isValid ) {
         let v = new Vehicle(req.body.name, req.body.wheels, req.body.color, req.body.capacity)
         vehicles.unshift(v)
@@ -43,6 +50,8 @@ function addVehicle(req, res){
 
 function updateVehicle(req, res){
 
+    res.set('Access-Control-Allow-Methods: PUT');
+    res.set('Access-Control-Allow-Origin', cors_url)
     var findVehicle = vehicles.find( vehicle => vehicle.id == req.params.vehicleId )
 
     if ( findVehicle ){
@@ -66,7 +75,9 @@ function updateVehicle(req, res){
 
 function searchByName(req, res){
 
-    searchResults = vehicles.filter( (vehicle) => vehicle.name.trim() == req.params.vehicleName.trim() )
+    res.set('Access-Control-Allow-Methods: GET');
+    res.set('Access-Control-Allow-Origin', cors_url)
+    let searchResults = vehicles.filter( (vehicle) => vehicle.name.trim() == req.params.vehicleName.trim() )
     
     if ( searchResults.length > 0 ){
         res.json(searchResults);
@@ -77,6 +88,8 @@ function searchByName(req, res){
 
 function searchByColor(req, res){
 
+    res.set('Access-Control-Allow-Methods: GET');
+    res.set('Access-Control-Allow-Origin', cors_url)
     var searchResults = vehicles.filter( vehicle => vehicle.color == req.params.vehicleColor )
     
     if ( searchResults.length > 0 ){
@@ -88,6 +101,8 @@ function searchByColor(req, res){
 
 function deleteVehicle(req, res){
 
+    res.set('Access-Control-Allow-Methods: DELETE');
+    res.set('Access-Control-Allow-Origin', cors_url)
     var findVehicle = vehicles.find( vehicle =>  vehicle.id == req.params.vehicleId )
 
     if ( findVehicle ){
